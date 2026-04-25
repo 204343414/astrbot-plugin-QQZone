@@ -2043,7 +2043,9 @@ class QzonePlugin(Star):
         self.session = QzoneSession()
         self.session.cfg = self.cfg
         # QQ空间
-        self.qzone = QzoneAPI(self.session, self.cfg)
+        self.qzone = QzoneAPI()
+        self.qzone.session = self.session
+        self.qzone.cfg = self.cfg
         # 数据库
         self.db = PostDB(self.cfg)
         # 用户画像（记忆）
