@@ -40,7 +40,7 @@ from astrbot.core.provider.provider import Provider
 # ============================================================
 # TODO: 请将你漏发的 qzone.py 内容完整复制到这里
 # ============================================================
-from .qzone import QzoneAPI, QzoneSession
+from .core.qzone import QzoneAPI, QzoneSession, QzoneParser
 
 # ============================================================
 # utils.py 中的工具函数
@@ -1671,6 +1671,7 @@ class PostService:
         )
         
 
+        await self.db.save(post)
     async def publish_post(
         self,
         *,
@@ -1706,6 +1707,7 @@ class PostService:
         post.create_time = resp.data.get("now", post.create_time)
 
         # 持久化
+        await self.db.save(post)
         
         return post
 
