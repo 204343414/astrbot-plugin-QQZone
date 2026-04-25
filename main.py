@@ -1426,15 +1426,7 @@ class Sender:
 # service.py 中的 PostService（依赖 qzone，暂时用占位）
 # ============================================================
 
-# 前向声明 QzoneAPI 和 QzoneSession，实际需由 qzone.py 提供
-# 请将你 qzone.py 中的 QzoneAPI 和 QzoneSession 类定义放在这里
-try:
-    from .qzone import QzoneAPI, QzoneSession, QzoneParser  # noqa: F811
-except ImportError:
-    # 临时占位，避免语法错误（运行时必须存在）
-    class QzoneAPI: ...
-    class QzoneSession: ...
-    class QzoneParser: ...
+
 
 class PostService:
     """
@@ -2040,12 +2032,9 @@ class QzonePlugin(Star):
         # 配置
         self.cfg = PluginConfig(config, context)
         # 会话
-        self.session = QzoneSession()
-        self.session.cfg = self.cfg
+        self.session = QzoneSession(self.cfg)
         # QQ空间
-        self.qzone = QzoneAPI()
-        self.qzone.session = self.session
-        self.qzone.cfg = self.cfg
+        self.qzone = QzoneAPI(self.session, self.cfg)
         # 数据库
         self.db = PostDB(self.cfg)
         # 用户画像（记忆）
