@@ -2040,7 +2040,8 @@ class QzonePlugin(Star):
         # 配置
         self.cfg = PluginConfig(config, context)
         # 会话
-        self.session = QzoneSession(self.cfg)
+        self.session = QzoneSession()
+        self.session.cfg = self.cfg
         # QQ空间
         self.qzone = QzoneAPI(self.session, self.cfg)
         # 数据库
