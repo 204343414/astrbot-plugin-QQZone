@@ -40,7 +40,7 @@ from astrbot.core.provider.provider import Provider
 # ============================================================
 # TODO: 请将你漏发的 qzone.py 内容完整复制到这里
 # ============================================================
-# from .qzone import QzoneAPI, QzoneSession  # 暂时注释，等你补充
+from .qzone import QzoneAPI, QzoneSession
 
 # ============================================================
 # utils.py 中的工具函数
